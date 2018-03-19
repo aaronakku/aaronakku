@@ -19,12 +19,10 @@
   var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/light-v9',
-    center: [74.1, 13.8],
+    center: [76.1, 13.8],
     zoom: 4
   });
-
   map.on('load', function () {
-
     map.addLayer({
       "id": "points",
       "type": "symbol",
@@ -32,7 +30,6 @@
         "type": "geojson",
         "data": {
           "type": "FeatureCollection",
-
           "features": [{
             "type": "Feature",
             "geometry": {
@@ -42,7 +39,6 @@
               ]
             },
             "properties": {
-
               "name": "Cheraman Malik Orphanage",
               "icon": "monument"
             }
@@ -55,7 +51,6 @@
               ]
             },
             "properties": {
-
               "name": "My home Prakash Kashid",
               "icon": "monument"
             }
@@ -69,7 +64,6 @@
               ]
             },
             "properties": {
-
               "name": "venkataya vyavastha",
               "icon": "monument"
             }
@@ -83,7 +77,6 @@
               ]
             },
             "properties": {
-
               "name": "Deepam",
               "icon": "monument"
             }
