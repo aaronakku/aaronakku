@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Fly to a location based on scroll position</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+
+<style>
+#map {
+    position: fixed;
+    width:50%;
+}
+#features {
+    width: 50%;
+    margin-left: 50%;
+    font-family: sans-serif;
+    overflow-y: scroll;
+    background-color: #fafafa;
+}
+section {
+    padding:  25px 50px;
+    line-height: 25px;
+    border-bottom: 1px solid #ddd;
+    opacity: 0.25;
+    font-size: 13px;
+}
+section.active {
+    opacity: 1;
+}
+section:last-child {
+    border-bottom: none;
+    margin-bottom: 200px;
+}
+</style>
+
+<div id='map'></div>
+<div id='features'>
+    <section id='Bhujodi' class='active'>
+        <h3>Bhujodi</h3>
+        <p>A small town just 8 km southeast of Bhuj, Bhujodi is a major textile center of Kutch, with the vast majority of the 1200 inhabitants involved in textile handicraft production. Here you can meet weavers, tie-dye artists and block printers, most of whom belong to the Vankar community.</p>
+    </section>
+    <section id='Ludiya village'>
+        <h3>Ludiya village</h3>
+        <p>Ludiya is undoubtedly one of the most beautiful village in your kutch tour. Ludiya is located 70kms north of Bhuj in Bannidistrick of Kutch.</p>
+    </section>
+    <section id='Khavda'>
+        <h3>Khavda</h3>
+        <p>Khavda is a village in Bhuj Taluka of Kutch district of Gujarat, India. It lies on the west side of Pachham Island in Greater Rann of Kutch.</p>
+    </section>
+    <section id='Rock Garden'>
+        <h3>Rock Garden</h3>
+        <p>A rock garden, also known as a rockery or an alpine garden, is a small field or plot of ground designed to feature and emphasize a variety of rocks, stones, and boulders.</p>
+    </section>
+    <section id='Airwa'>
+        <h3>Airwa</h3>
+        <p>Airwa is a town in Auraiya district in the Indian state of Uttar Pradesh.</p>
+    </section>
+    <section id='Pandavas Cave'>
+        <h3>Pandavas Cave</h3>
+        <p>The picturesque Satpura ranges around Panchmarhi town hide countless natural and historical marvels. One of them is right inside the town - five rock-cut temples known as Pandav Caves.</p>
+    </section>
+    <section id='Hodka'>
+        <h3>Hodka</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.The Meghwals, traditional leather craft and embroidery craftspersons, from further north, have also settled in Hodka over time.</p>
+    </section>
+    <section id='Chennakeshava Temple'>
+        <h3>Chennakeshava Temple</h3>
+        <p>The Chennakeshava Temple, also referred to as Keshava, Kesava or Vijayanarayana Temple of Belur, is a 12th-century Hindu temple in the Hassan district of Karnataka state, India.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </section>
+</div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1Ijoic25laGFzYW50aG9zaCIsImEiOiJjamVtbXRnb3EwNzI4MzNtbTZtNDNldGE1In0.WXYWA8ovqMCB7GYoI2kIiQ';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v9',
+    center: [69.73668118938804,
+    23.224330920065498],
+    zoom: 15.5,
+    bearing: 27,
+    pitch: 30
+});
+var chapters = {
+    'Bhujodi': {
+        bearing: 27,
+        center: [69.73668118938804,
+        23.224330920065498],
+        zoom: 19.5,
+        pitch: 20
+    },
+    'Ludiya village': {
+        duration: 6000,
+        center: [69.73944939672947,
+        23.825128208349824],
+        bearing: 150,
+        zoom: 18,
+        pitch: 10
+    },
+    'Khavda': {
+        bearing: 90,
+        center: [69.72992353141308,
+        23.84236003779357],
+        zoom: 13,
+        speed: 0.6,
+        pitch: 40
+    },
+    'Rock Garden': {
+        bearing: 90,
+        center: [75.90021092444658, 16.336088054514562],
+        zoom: 16.3
+    },
+    'Airwa': {
+        bearing: 45,
+        center: [79.42065174691379, 26.901783447270518],
+        zoom: 15.3,
+        pitch: 20,
+        speed: 0.5
+    },
+    'Pandavas Cave': {
+        bearing: 180,
+        center: [74.0245799627155,15.499633042543067],
+        zoom: 17.3
+    },
+    'Hodka': {
+        bearing: 90,
+        center: [69.59731821902096,
+        23.664313323867333],
+        zoom: 17.3,
+        pitch: 40
+    },
+    'Chennakeshava Temple': {
+        bearing: 90,
+        center: [75.86033108644187, 13.162923932952907],
+        zoom: 12.3
+    }
+};
+// On every scroll event, check which element is on screen
+window.onscroll = function() {
+    var chapterNames = Object.keys(chapters);
+    for (var i = 0; i < chapterNames.length; i++) {
+        var chapterName = chapterNames[i];
+        if (isElementOnScreen(chapterName)) {
+            setActiveChapter(chapterName);
+            break;
+        }
+    }
+};
+var activeChapterName = 'Bhujodi';
+function setActiveChapter(chapterName) {
+    if (chapterName === activeChapterName) return;
+    map.flyTo(chapters[chapterName]);
+    document.getElementById(chapterName).setAttribute('class', 'active');
+    document.getElementById(activeChapterName).setAttribute('class', '');
+    activeChapterName = chapterName;
+}
+function isElementOnScreen(id) {
+    var element = document.getElementById(id);
+    var bounds = element.getBoundingClientRect();
+    return bounds.top < window.innerHeight && bounds.bottom > 0;
+}
+</script>
+
+
+</body>
+</html>
